@@ -8,7 +8,7 @@ export const NavbarContainer = styled.nav`
   height: 15.5vh;
   padding: 0 6em;
   background-color: ${(props) =>
-    props.isDarkTheme ? "rgb(25, 25, 25)" : "rgb(255, 255, 255)"};
+    props.isDarkTheme ? "rgb(24, 24, 24)" : "rgb(255, 255, 255)"};
 `;
 
 export const WebsiteLogo = styled.img`
@@ -78,7 +78,8 @@ export const LogoutButton = styled.button`
   border-radius: 0.125em;
   color: ${(props) =>
     props.isDarkTheme ? "rgb(255, 255, 255)" : "rgb(230, 48, 42)"};
-  font-size: 1.6rem;
+  font-size: 1.5rem;
+  font-family: "Roboto";
   cursor: pointer;
 
   @media screen and (max-width: 992px) {
@@ -94,7 +95,7 @@ export const ModalContainer = styled.div`
   border-radius: 1em;
   box-shadow: grey 0px 0px 20px;
   background-color: ${(props) =>
-    props.isDarkTheme ? "rgb(25, 25, 25)" : "rgb(255, 255, 255)"};
+    props.isDarkTheme ? "rgb(24, 24, 24)" : "rgb(255, 255, 255)"};
 `;
 
 export const ModalHeading = styled.h2`

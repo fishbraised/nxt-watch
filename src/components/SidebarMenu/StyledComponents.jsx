@@ -7,7 +7,7 @@ export const SidebarMenuContainer = styled.aside`
   width: 20%;
   height: 84.5vh;
   background-color: ${(props) =>
-    props.isDarkTheme ? "rgb(25, 25, 25)" : "rgb(255, 255, 255)"};
+    props.isDarkTheme ? "rgb(24, 24, 24)" : "rgb(255, 255, 255)"};
 
   @media screen and (max-width: 992px) {
     display: none;
@@ -30,7 +30,7 @@ export const ContactHeading = styled.h3`
   margin: 0;
   margin-top: 1.25em;
   color: ${(props) =>
-    props.isDarkTheme ? "rgb(250, 250, 250)" : "rgb(71, 85, 105)"};
+    props.isDarkTheme ? "rgb(255, 255, 255)" : "rgb(71, 85, 105)"};
   font-size: 1.6rem;
   font-weight: 500;
   font-family: "Roboto";
@@ -52,7 +52,7 @@ export const FooterDescription = styled.p`
   margin: 0;
   margin-top: 1.25em;
   color: ${(props) =>
-    props.isDarkTheme ? "rgb(250, 250, 250)" : "rgb(71, 85, 105)"};
+    props.isDarkTheme ? "rgb(255, 255, 255)" : "rgb(71, 85, 105)"};
   font-size: 1.6rem;
   font-family: "Roboto";
 `;

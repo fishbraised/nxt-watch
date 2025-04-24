@@ -65,9 +65,14 @@ const ActionItem = (props) => {
 
             case "DISLIKE":
               toggleDislikedVideo(videoData);
-
-              console.log("DISLIKE onItemClick triggered.");
               return;
+
+            case "SHARE":
+              const message = `Hey, check out this video!\n${videoData.videoUrl}`;
+              const encodedMessage = encodeURIComponent(message);
+              const whatsAppURL = `https://web.whatsapp.com/send?text=${encodedMessage}`;
+
+              window.open(whatsAppURL, "_blank");
           }
         };
 

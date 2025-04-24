@@ -19,7 +19,8 @@ export const InfoContainer = styled.div`
 
 export const VideoTitle = styled.p`
   margin: 0;
-  color: rgb(251, 251, 250);
+  color: ${(props) =>
+    props.isDarkTheme ? "rgb(255, 255, 255)" : "rgb(35, 31, 32)"};
   font-size: 1.8rem;
   font-weight: 500;
   font-family: "Roboto";
@@ -27,7 +28,8 @@ export const VideoTitle = styled.p`
 
 export const ChannelName = styled.p`
   margin: 0.6em 0;
-  color: rgb(148, 163, 184);
+  color: ${(props) =>
+    props.isDarkTheme ? "rgb(148, 163, 184)" : "rgb(96, 96, 96)"};
   font-size: 1.4rem;
   font-family: "Roboto";
 `;
@@ -41,7 +43,8 @@ export const ViewsDateContainer = styled.div`
 
 export const ViewsDateText = styled.p`
   margin: 0;
-  color: rgb(148, 163, 184);
+  color: ${(props) =>
+    props.isDarkTheme ? "rgb(148, 163, 184)" : "rgb(96, 96, 96)"};
   font-size: 1.4rem;
   font-family: "Roboto";
 `;

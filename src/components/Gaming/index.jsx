@@ -2,6 +2,8 @@ import Navbar from "../Navbar";
 import SidebarMenu from "../SidebarMenu";
 import GamingVideoItem from "../GamingVideoItem";
 
+import VideosContext from "../../context/VideosContext";
+
 import {
   GamingContainer,
   ResponsiveContainer,
@@ -48,10 +50,12 @@ class Gaming extends Component {
     );
   };
 
-  renderFailureView = () => (
+  renderFailureView = (isDarkTheme) => (
     <FailureContainer>
       <FailureImage src="https://res.cloudinary.com/dkoqbt4pc/image/upload/v1742306194/Nxt%20Watch/error-picture.png" />
-      <FailureText>An error in obtaining server data has occurred.</FailureText>
+      <FailureText isDarkTheme={isDarkTheme}>
+        An error in obtaining server data has occurred.
+      </FailureText>
     </FailureContainer>
   );
 
@@ -61,14 +65,14 @@ class Gaming extends Component {
     </LoaderContainer>
   );
 
-  renderSwitch = () => {
+  renderSwitch = (isDarkTheme) => {
     const { apiStatus } = this.state;
 
     switch (apiStatus) {
       case apiStatusConstants.success:
         return this.renderSuccessView();
       case apiStatusConstants.failure:
-        return this.renderFailureView();
+        return this.renderFailureView(isDarkTheme);
       case apiStatusConstants.inProgress:
         return this.renderLoader();
     }
@@ -112,25 +116,35 @@ class Gaming extends Component {
 
   render() {
     return (
-      <GamingContainer>
-        <Navbar />
+      <VideosContext.Consumer>
+        {(value) => {
+          const { isDarkTheme } = value;
 
-        <ResponsiveContainer>
-          <SidebarMenu />
+          return (
+            <GamingContainer isDarkTheme={isDarkTheme}>
+              <Navbar />
 
-          <MainContainer>
-            <CategoryContainer>
-              <IconContainer>
-                <SiYoutubegaming color="rgb(230, 48, 42)" size="100%" />
-              </IconContainer>
+              <ResponsiveContainer>
+                <SidebarMenu />
 
-              <CategoryHeading>Gaming</CategoryHeading>
-            </CategoryContainer>
+                <MainContainer>
+                  <CategoryContainer isDarkTheme={isDarkTheme}>
+                    <IconContainer isDarkTheme={isDarkTheme}>
+                      <SiYoutubegaming color="rgb(230, 48, 42)" size="100%" />
+                    </IconContainer>
 
-            {this.renderSwitch()}
-          </MainContainer>
-        </ResponsiveContainer>
-      </GamingContainer>
+                    <CategoryHeading isDarkTheme={isDarkTheme}>
+                      Gaming
+                    </CategoryHeading>
+                  </CategoryContainer>
+
+                  {this.renderSwitch(isDarkTheme)}
+                </MainContainer>
+              </ResponsiveContainer>
+            </GamingContainer>
+          );
+        }}
+      </VideosContext.Consumer>
     );
   }
 }

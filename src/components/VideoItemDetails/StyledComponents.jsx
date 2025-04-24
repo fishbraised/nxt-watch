@@ -47,8 +47,6 @@ export const ViewsAndActionsContainer = styled.div`
 
 export const ViewsDateContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 160px;
 `;
 
 export const ViewsDateText = styled.p`

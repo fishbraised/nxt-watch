@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HomeContainer = styled.div`
   min-height: 100vh;
   background-color: ${(props) =>
-    props.isDarkTheme ? "rgb(15, 15, 15)" : "rgb(250, 250, 250)"};
+    props.isDarkTheme ? "rgb(15, 15, 15)" : "rgb(249, 249, 249)"};
 `;
 
 export const ResponsiveContainer = styled.div`
@@ -27,7 +27,8 @@ export const SearchContainer = styled.form`
   justify-content: space-between;
   width: 400px;
   height: 32.5px;
-  border: 2px solid rgb(56, 56, 56);
+  border: 2px solid
+    ${(props) => (props.isDarkTheme ? "rgb(56, 56, 56)" : "rgb(204, 204, 204)")};
   border-radius: 0.5em;
 `;
 
@@ -36,7 +37,7 @@ export const SearchInput = styled.input`
 
   width: 100%;
   padding: 0.5em 1.125em;
-  color: rgb(251, 251, 250);
+  color: rgb(249, 249, 249);
   font-size: 1.4rem;
   font-family: "Roboto";
 
@@ -54,7 +55,8 @@ export const SearchButton = styled.button`
   justify-content: center;
   align-items: center;
   width: 80px;
-  border-left: 2px solid rgb(56, 56, 56);
+  border-left: 2px solid
+    ${(props) => (props.isDarkTheme ? "rgb(56, 56, 56)" : "rgb(204, 204, 204)")};
   cursor: pointer;
 
   &:hover {
@@ -88,7 +90,8 @@ export const FailureImage = styled.img`
 `;
 
 export const FailureText = styled.p`
-  color: rgb(251, 251, 250);
+  color: ${(props) =>
+    props.isDarkTheme ? "rgb(249, 249, 249)" : "rgb(15, 15, 15)"};
   font-size: 1.6rem;
   font-family: "Roboto";
 `;

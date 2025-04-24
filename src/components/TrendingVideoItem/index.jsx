@@ -1,3 +1,5 @@
+import VideosContext from "../../context/VideosContext";
+
 import {
   TrendingVideoItemContainer,
   ThumbnailImage,
@@ -10,30 +12,40 @@ import {
 
 import { Link } from "react-router-dom";
 
-const TrendingVideoItem = (props) => {
-  const { trendingVideoInfo } = props;
-  const { channel, id, publishedAt, thumbnailUrl, title, viewCount } =
-    trendingVideoInfo;
-  const { name, profileImageUrl } = channel;
+const TrendingVideoItem = (props) => (
+  <VideosContext.Consumer>
+    {(value) => {
+      const { trendingVideoInfo } = props;
+      const { channel, id, publishedAt, thumbnailUrl, title, viewCount } =
+        trendingVideoInfo;
+      const { name, profileImageUrl } = channel;
 
-  return (
-    <Link to={`/videos/${id}`}>
-      <TrendingVideoItemContainer>
-        <ThumbnailImage src={thumbnailUrl} />
+      const { isDarkTheme } = value;
 
-        <InfoContainer>
-          <VideoTitle>{title}</VideoTitle>
-          <ChannelName>{name}</ChannelName>
+      return (
+        <Link to={`/videos/${id}`}>
+          <TrendingVideoItemContainer>
+            <ThumbnailImage src={thumbnailUrl} />
 
-          <ViewsDateContainer>
-            <ViewsDateText>{viewCount} views</ViewsDateText>
-            <ViewsDateText>•</ViewsDateText>
-            <ViewsDateText>{publishedAt}</ViewsDateText>
-          </ViewsDateContainer>
-        </InfoContainer>
-      </TrendingVideoItemContainer>
-    </Link>
-  );
-};
+            <InfoContainer>
+              <VideoTitle isDarkTheme={isDarkTheme}>{title}</VideoTitle>
+              <ChannelName isDarkTheme={isDarkTheme}>{name}</ChannelName>
+
+              <ViewsDateContainer>
+                <ViewsDateText isDarkTheme={isDarkTheme}>
+                  {viewCount} views
+                </ViewsDateText>
+                <ViewsDateText isDarkTheme={isDarkTheme}>•</ViewsDateText>
+                <ViewsDateText isDarkTheme={isDarkTheme}>
+                  {publishedAt}
+                </ViewsDateText>
+              </ViewsDateContainer>
+            </InfoContainer>
+          </TrendingVideoItemContainer>
+        </Link>
+      );
+    }}
+  </VideosContext.Consumer>
+);
 
 export default TrendingVideoItem;

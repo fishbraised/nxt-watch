@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const SavedVideosContainer = styled.div`
   min-height: 100vh;
-  background-color: rgb(15, 15, 15);
+  background-color: ${(props) =>
+    props.isDarkTheme ? "rgb(15, 15, 15)" : "rgb(249, 249, 249)"};
 `;
 
 export const ResponsiveContainer = styled.div`
@@ -21,7 +22,8 @@ export const CategoryContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 1.25em 2.25em;
-  background-color: rgb(33, 33, 33);
+  background-color: ${(props) =>
+    props.isDarkTheme ? "rgb(33, 33, 33)" : "rgb(244, 244, 244)"};
 `;
 
 export const IconContainer = styled.div`
@@ -30,11 +32,13 @@ export const IconContainer = styled.div`
   padding: 1em;
   margin-right: 1.5em;
   border-radius: 50%;
-  background-color: rgb(15, 15, 15);
+  background-color: ${(props) =>
+    props.isDarkTheme ? "rgb(15, 15, 15)" : "rgb(226, 232, 240)"};
 `;
 
 export const CategoryHeading = styled.h1`
-  color: rgb(251, 251, 250);
+  color: ${(props) =>
+    props.isDarkTheme ? "rgb(255, 255, 255)" : "rgb(30, 41, 59)"};
   font-size: 2rem;
   font-family: "Roboto";
 `;
@@ -68,7 +72,8 @@ export const FailureImage = styled.img`
 `;
 
 export const FailureText = styled.p`
-  color: rgb(251, 251, 250);
+  color: ${(props) =>
+    props.isDarkTheme ? "rgb(249, 249, 249)" : "rgb(15, 15, 15)"};
   font-size: 1.6rem;
   font-family: "Roboto";
 `;

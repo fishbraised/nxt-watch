@@ -1,3 +1,5 @@
+import VideosContext from "../../context/VideosContext";
+
 import {
   SavedVideoItemContainer,
   ThumbnailImage,
@@ -10,30 +12,40 @@ import {
 
 import { Link } from "react-router-dom";
 
-const SavedVideosItem = (props) => {
-  const { savedVideoInfo } = props;
-  const { channel, id, publishedAt, thumbnailUrl, title, viewCount } =
-    savedVideoInfo;
-  const { name, profileImageUrl } = channel;
+const SavedVideosItem = (props) => (
+  <VideosContext.Consumer>
+    {(value) => {
+      const { savedVideoInfo } = props;
+      const { channel, id, publishedAt, thumbnailUrl, title, viewCount } =
+        savedVideoInfo;
+      const { name, profileImageUrl } = channel;
 
-  return (
-    <Link to={`/videos/${id}`}>
-      <SavedVideoItemContainer>
-        <ThumbnailImage src={thumbnailUrl} />
+      const { isDarkTheme } = value;
 
-        <InfoContainer>
-          <VideoTitle>{title}</VideoTitle>
-          <ChannelName>{name}</ChannelName>
+      return (
+        <Link to={`/videos/${id}`}>
+          <SavedVideoItemContainer>
+            <ThumbnailImage src={thumbnailUrl} />
 
-          <ViewsDateContainer>
-            <ViewsDateText>{viewCount} views</ViewsDateText>
-            <ViewsDateText>•</ViewsDateText>
-            <ViewsDateText>{publishedAt}</ViewsDateText>
-          </ViewsDateContainer>
-        </InfoContainer>
-      </SavedVideoItemContainer>
-    </Link>
-  );
-};
+            <InfoContainer>
+              <VideoTitle isDarkTheme={isDarkTheme}>{title}</VideoTitle>
+              <ChannelName isDarkTheme={isDarkTheme}>{name}</ChannelName>
+
+              <ViewsDateContainer>
+                <ViewsDateText isDarkTheme={isDarkTheme}>
+                  {viewCount} views
+                </ViewsDateText>
+                <ViewsDateText isDarkTheme={isDarkTheme}>•</ViewsDateText>
+                <ViewsDateText isDarkTheme={isDarkTheme}>
+                  {publishedAt}
+                </ViewsDateText>
+              </ViewsDateContainer>
+            </InfoContainer>
+          </SavedVideoItemContainer>
+        </Link>
+      );
+    }}
+  </VideosContext.Consumer>
+);
 
 export default SavedVideosItem;

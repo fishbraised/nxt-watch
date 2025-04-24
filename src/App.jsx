@@ -107,9 +107,6 @@ class App extends Component {
   render() {
     const { savedVideos, likedVideos, dislikedVideos, activeTab, isDarkTheme } =
       this.state;
-    console.log("Saved Videos: ", savedVideos);
-    console.log("Liked Videos: ", likedVideos);
-    console.log("isDarkTheme: ", isDarkTheme);
 
     return (
       <VideosContext.Provider

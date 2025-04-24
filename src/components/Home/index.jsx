@@ -65,10 +65,12 @@ class Home extends Component {
     );
   };
 
-  renderFailureView = () => (
+  renderFailureView = (isDarkTheme) => (
     <FailureContainer>
       <FailureImage src="https://res.cloudinary.com/dkoqbt4pc/image/upload/v1742306194/Nxt%20Watch/error-picture.png" />
-      <FailureText>An error in obtaining server data has occurred.</FailureText>
+      <FailureText isDarkTheme={isDarkTheme}>
+        An error in obtaining server data has occurred.
+      </FailureText>
     </FailureContainer>
   );
 
@@ -78,14 +80,14 @@ class Home extends Component {
     </LoaderContainer>
   );
 
-  renderSwitch = () => {
+  renderSwitch = (isDarkTheme) => {
     const { apiStatus } = this.state;
 
     switch (apiStatus) {
       case apiStatusConstants.success:
         return this.renderSuccessView();
       case apiStatusConstants.failure:
-        return this.renderFailureView();
+        return this.renderFailureView(isDarkTheme);
       case apiStatusConstants.inProgress:
         return this.renderLoader();
     }
@@ -136,43 +138,48 @@ class Home extends Component {
   render() {
     const { searchValue, displayBanner } = this.state;
 
-    <VideosContext.Consumer>
-      {(value) => {
-        const { isDarkTheme } = value;
+    return (
+      <VideosContext.Consumer>
+        {(value) => {
+          const { isDarkTheme } = value;
 
-        return (
-          <HomeContainer isDarkTheme={isDarkTheme}>
-            <Navbar />
+          return (
+            <HomeContainer isDarkTheme={isDarkTheme}>
+              <Navbar />
 
-            <ResponsiveContainer>
-              <SidebarMenu />
+              <ResponsiveContainer>
+                <SidebarMenu />
 
-              <MainContainer>
-                {displayBanner && (
-                  <PremiumBanner closeBanner={this.closeBanner} />
-                )}
+                <MainContainer>
+                  {displayBanner && (
+                    <PremiumBanner closeBanner={this.closeBanner} />
+                  )}
 
-                <MainContent>
-                  <SearchContainer onSubmit={this.conductSearch}>
-                    <SearchInput
-                      onChange={this.updateSearchValue}
-                      value={searchValue}
-                      placeholder="Search"
-                    />
+                  <MainContent>
+                    <SearchContainer
+                      isDarkTheme={isDarkTheme}
+                      onSubmit={this.conductSearch}
+                    >
+                      <SearchInput
+                        onChange={this.updateSearchValue}
+                        value={searchValue}
+                        placeholder="Search"
+                      />
 
-                    <SearchButton type="submit">
-                      <IoIosSearch color="rgb(96, 96, 96)" size="20px" />
-                    </SearchButton>
-                  </SearchContainer>
+                      <SearchButton isDarkTheme={isDarkTheme} type="submit">
+                        <IoIosSearch color="rgb(96, 96, 96)" size="20px" />
+                      </SearchButton>
+                    </SearchContainer>
 
-                  {this.renderSwitch()}
-                </MainContent>
-              </MainContainer>
-            </ResponsiveContainer>
-          </HomeContainer>
-        );
-      }}
-    </VideosContext.Consumer>;
+                    {this.renderSwitch(isDarkTheme)}
+                  </MainContent>
+                </MainContainer>
+              </ResponsiveContainer>
+            </HomeContainer>
+          );
+        }}
+      </VideosContext.Consumer>
+    );
   }
 }
 

@@ -12,7 +12,7 @@ export const MenuTabContainer = styled.li`
 export const TabHeading = styled.h2`
   margin-left: 1em;
   color: ${(props) =>
-    props.isDarkTheme ? "rgb(255, 255, 255)" : "rgb(65, 65, 65)"};
+    props.isDarkTheme ? "rgb(255, 255, 255)" : "rgb(66, 66, 66)"};
   font-size: 1.6rem;
   font-weight: ${(props) => props.tabTextFontWeight};
   font-family: "Roboto";

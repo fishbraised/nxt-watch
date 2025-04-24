@@ -1,3 +1,5 @@
+import VideosContext from "../../context/VideosContext";
+
 import {
   GamingVideoItemContainer,
   ThumbnailImage,
@@ -8,23 +10,31 @@ import {
 
 import { Link } from "react-router-dom";
 
-const GamingVideoItem = (props) => {
-  const { gamingVideoInfo } = props;
-  const { id, thumbnailUrl, title, viewCount } = gamingVideoInfo;
+const GamingVideoItem = (props) => (
+  <VideosContext.Consumer>
+    {(value) => {
+      const { gamingVideoInfo } = props;
+      const { id, thumbnailUrl, title, viewCount } = gamingVideoInfo;
 
-  return (
-    <Link to={`/videos/${id}`}>
-      <GamingVideoItemContainer>
-        <ThumbnailImage src={thumbnailUrl} />
+      const { isDarkTheme } = value;
 
-        <InfoContainer>
-          <VideoTitle>{title}</VideoTitle>
+      return (
+        <Link to={`/videos/${id}`}>
+          <GamingVideoItemContainer>
+            <ThumbnailImage src={thumbnailUrl} />
 
-          <ViewsDateText>{viewCount} Watching Worldwide</ViewsDateText>
-        </InfoContainer>
-      </GamingVideoItemContainer>
-    </Link>
-  );
-};
+            <InfoContainer>
+              <VideoTitle isDarkTheme={isDarkTheme}>{title}</VideoTitle>
+
+              <ViewsDateText isDarkTheme={isDarkTheme}>
+                {viewCount} Watching Worldwide
+              </ViewsDateText>
+            </InfoContainer>
+          </GamingVideoItemContainer>
+        </Link>
+      );
+    }}
+  </VideosContext.Consumer>
+);
 
 export default GamingVideoItem;

@@ -2,6 +2,8 @@ import Navbar from "../Navbar";
 import SidebarMenu from "../SidebarMenu";
 import TrendingVideoItem from "../TrendingVideoItem";
 
+import VideosContext from "../../context/VideosContext";
+
 import {
   TrendingContainer,
   ResponsiveContainer,
@@ -48,10 +50,12 @@ class Trending extends Component {
     );
   };
 
-  renderFailureView = () => (
+  renderFailureView = (isDarkTheme) => (
     <FailureContainer>
       <FailureImage src="https://res.cloudinary.com/dkoqbt4pc/image/upload/v1742306194/Nxt%20Watch/error-picture.png" />
-      <FailureText>An error in obtaining server data has occurred.</FailureText>
+      <FailureText isDarkTheme={isDarkTheme}>
+        An error in obtaining server data has occurred.
+      </FailureText>
     </FailureContainer>
   );
 
@@ -61,14 +65,14 @@ class Trending extends Component {
     </LoaderContainer>
   );
 
-  renderSwitch = () => {
+  renderSwitch = (isDarkTheme) => {
     const { apiStatus } = this.state;
 
     switch (apiStatus) {
       case apiStatusConstants.success:
         return this.renderSuccessView();
       case apiStatusConstants.failure:
-        return this.renderFailureView();
+        return this.renderFailureView(isDarkTheme);
       case apiStatusConstants.inProgress:
         return this.renderLoader();
     }
@@ -116,25 +120,35 @@ class Trending extends Component {
 
   render() {
     return (
-      <TrendingContainer>
-        <Navbar />
+      <VideosContext.Consumer>
+        {(value) => {
+          const { isDarkTheme } = value;
 
-        <ResponsiveContainer>
-          <SidebarMenu />
+          return (
+            <TrendingContainer isDarkTheme={isDarkTheme}>
+              <Navbar />
 
-          <MainContainer>
-            <CategoryContainer>
-              <IconContainer>
-                <HiFire color="rgb(230, 48, 42)" size="100%" />
-              </IconContainer>
+              <ResponsiveContainer>
+                <SidebarMenu />
 
-              <CategoryHeading>Trending</CategoryHeading>
-            </CategoryContainer>
+                <MainContainer>
+                  <CategoryContainer isDarkTheme={isDarkTheme}>
+                    <IconContainer isDarkTheme={isDarkTheme}>
+                      <HiFire color="rgb(230, 48, 42)" size="100%" />
+                    </IconContainer>
 
-            {this.renderSwitch()}
-          </MainContainer>
-        </ResponsiveContainer>
-      </TrendingContainer>
+                    <CategoryHeading isDarkTheme={isDarkTheme}>
+                      Trending
+                    </CategoryHeading>
+                  </CategoryContainer>
+
+                  {this.renderSwitch(isDarkTheme)}
+                </MainContainer>
+              </ResponsiveContainer>
+            </TrendingContainer>
+          );
+        }}
+      </VideosContext.Consumer>
     );
   }
 }

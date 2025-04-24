@@ -1,3 +1,5 @@
+import VideosContext from "../../context/VideosContext";
+
 import {
   HomeVideoItemContainer,
   ThumbnailImage,
@@ -12,34 +14,44 @@ import {
 
 import { Link } from "react-router-dom";
 
-const HomeVideoItem = (props) => {
-  const { videoInfo } = props;
-  const { channel, id, publishedAt, thumbnailUrl, title, viewCount } =
-    videoInfo;
-  const { name, profileImageUrl } = channel;
+const HomeVideoItem = (props) => (
+  <VideosContext.Consumer>
+    {(value) => {
+      const { videoInfo } = props;
+      const { channel, id, publishedAt, thumbnailUrl, title, viewCount } =
+        videoInfo;
+      const { name, profileImageUrl } = channel;
 
-  return (
-    <Link to={`/videos/${id}`}>
-      <HomeVideoItemContainer>
-        <ThumbnailImage src={thumbnailUrl} />
+      const { isDarkTheme } = value;
 
-        <InfoContainer>
-          <ChannelProfile src={profileImageUrl} />
+      return (
+        <Link to={`/videos/${id}`}>
+          <HomeVideoItemContainer>
+            <ThumbnailImage src={thumbnailUrl} />
 
-          <TextInfoContainer>
-            <VideoTitle>{title}</VideoTitle>
-            <ChannelName>{name}</ChannelName>
+            <InfoContainer>
+              <ChannelProfile src={profileImageUrl} />
 
-            <ViewsDateContainer>
-              <ViewsDateText>{viewCount} views</ViewsDateText>
-              <ViewsDateText>•</ViewsDateText>
-              <ViewsDateText>{publishedAt}</ViewsDateText>
-            </ViewsDateContainer>
-          </TextInfoContainer>
-        </InfoContainer>
-      </HomeVideoItemContainer>
-    </Link>
-  );
-};
+              <TextInfoContainer>
+                <VideoTitle isDarkTheme={isDarkTheme}>{title}</VideoTitle>
+                <ChannelName isDarkTheme={isDarkTheme}>{name}</ChannelName>
+
+                <ViewsDateContainer>
+                  <ViewsDateText isDarkTheme={isDarkTheme}>
+                    {viewCount} views
+                  </ViewsDateText>
+                  <ViewsDateText isDarkTheme={isDarkTheme}>•</ViewsDateText>
+                  <ViewsDateText isDarkTheme={isDarkTheme}>
+                    {publishedAt}
+                  </ViewsDateText>
+                </ViewsDateContainer>
+              </TextInfoContainer>
+            </InfoContainer>
+          </HomeVideoItemContainer>
+        </Link>
+      );
+    }}
+  </VideosContext.Consumer>
+);
 
 export default HomeVideoItem;
