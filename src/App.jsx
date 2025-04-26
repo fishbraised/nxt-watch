@@ -47,9 +47,15 @@ class App extends Component {
   };
 
   toggleLikedVideo = (videoData) => {
-    const { likedVideos } = this.state;
+    const { likedVideos, dislikedVideos } = this.state;
 
     const foundLikedVideo = likedVideos.find((eachObj) => {
+      if (videoData.id === eachObj.id) {
+        return true;
+      }
+    });
+
+    const foundDislikedVideo = dislikedVideos.find((eachObj) => {
       if (videoData.id === eachObj.id) {
         return true;
       }
@@ -66,12 +72,25 @@ class App extends Component {
         }
       });
 
-      this.setState({ likedVideos: updatedLikedVideos });
+      let updatedDislikedVideos = dislikedVideos;
+
+      if (foundDislikedVideo) {
+        updatedDislikedVideos = dislikedVideos.filter((eachObj) => {
+          if (videoData.id !== eachObj.id) {
+            return true;
+          }
+        });
+      }
+
+      this.setState({
+        likedVideos: updatedLikedVideos,
+        dislikedVideos: updatedDislikedVideos,
+      });
     }
   };
 
   toggleDislikedVideo = (videoData) => {
-    const dislikedVideos = this.state;
+    const { dislikedVideos } = this.state;
 
     const foundDislikedVideo = dislikedVideos.find((eachObj) => {
       if (videoData.id === eachObj.id) {

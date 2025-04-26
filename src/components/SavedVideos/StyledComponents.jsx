@@ -64,23 +64,25 @@ export const FailureContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 71.5vh;
+  height: 67.5vh;
 `;
 
 export const FailureImage = styled.img`
-  width: 110px;
+  width: 220px;
 `;
 
-export const FailureText = styled.p`
+export const FailureHeading = styled.h2`
+  margin-top: 2em;
   color: ${(props) =>
-    props.isDarkTheme ? "rgb(249, 249, 249)" : "rgb(15, 15, 15)"};
-  font-size: 1.6rem;
+    props.isDarkTheme ? "rgb(255, 255, 255)" : "rgb(56, 56, 56)"};
+  font-size: 1.8rem;
   font-family: "Roboto";
 `;
 
-export const LoaderContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 71.5vh;
+export const FailureText = styled.p`
+  margin: 0;
+  color: ${(props) =>
+    props.isDarkTheme ? "rgb(148, 163, 184)" : "rgb(96, 96, 96)"};
+  font-size: 1.6rem;
+  font-family: "Roboto";
 `;
