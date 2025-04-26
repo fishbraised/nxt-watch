@@ -91,7 +91,7 @@ export const FailureImage = styled.img`
 
 export const FailureText = styled.p`
   color: ${(props) =>
-    props.isDarkTheme ? "rgb(249, 249, 249)" : "rgb(15, 15, 15)"};
+    props.isDarkTheme ? "rgb(255, 255, 255)" : "rgb(56, 56, 56)"};
   font-size: 1.6rem;
   font-family: "Roboto";
 `;

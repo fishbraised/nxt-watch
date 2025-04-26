@@ -73,6 +73,7 @@ const ActionItem = (props) => {
               const whatsAppURL = `https://web.whatsapp.com/send?text=${encodedMessage}`;
 
               window.open(whatsAppURL, "_blank");
+              return;
           }
         };
 

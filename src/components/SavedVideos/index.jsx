@@ -13,6 +13,10 @@ import {
   CategoryHeading,
   MainContent,
   SavedVideosList,
+  FailureContainer,
+  FailureImage,
+  FailureHeading,
+  FailureText,
 } from "./StyledComponents";
 
 import { MdOutlinePlaylistAdd } from "react-icons/md";
@@ -22,7 +26,6 @@ class SavedVideos extends Component {
   state = { isSavedVideosEmpty: true };
 
   renderSuccessView = () => {
-    console.log("successview");
     return (
       <SavedVideosList>
         {savedVideos.map((eachObj) => (
@@ -32,32 +35,26 @@ class SavedVideos extends Component {
     );
   };
 
-  renderFailureView = () => {
-    console.log("failureview");
+  renderFailureView = (isDarkTheme) => {
     return (
       <FailureContainer>
         <FailureImage src="https://res.cloudinary.com/dkoqbt4pc/image/upload/v1745055963/Nxt%20Watch/no-saved-videos.png" />
+        <FailureHeading isDarkTheme={isDarkTheme}>
+          No saved videos found
+        </FailureHeading>
         <FailureText isDarkTheme={isDarkTheme}>
-          An error in obtaining server data has occurred.
+          You can save your videos while watching them
         </FailureText>
       </FailureContainer>
     );
   };
 
-  renderSwitch = (savedVideos) => {
-    if ([] == true) {
-      this.setState({ isSavedVideosEmpty: false }, this.renderSuccessView());
-    } else if ([] == false) {
-      this.setState({ isSavedVideosEmpty: true }, this.renderFailureView());
+  renderSwitch = (savedVideos, isDarkTheme) => {
+    if (savedVideos.length === 0) {
+      return this.renderFailureView(isDarkTheme);
+    } else {
+      return this.renderSuccessView();
     }
-
-    // const { isSavedVideosEmpty } = this.state;
-
-    // return isSavedVideosEmpty
-    //   ?
-    //   : ;
-
-    console.log("savedVideosState: ", savedVideos);
   };
 
   render() {
@@ -87,7 +84,9 @@ class SavedVideos extends Component {
                     </CategoryHeading>
                   </CategoryContainer>
 
-                  <MainContent>{this.renderSwitch(savedVideos)}</MainContent>
+                  <MainContent>
+                    {this.renderSwitch(savedVideos, isDarkTheme)}
+                  </MainContent>
                 </MainContainer>
               </ResponsiveContainer>
             </SavedVideosContainer>
