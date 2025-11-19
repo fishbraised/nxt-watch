@@ -1,6 +1,6 @@
 import Navbar from "../Navbar";
 import SidebarMenu from "../SidebarMenu";
-import ActionItem from "../Actionitem";
+import ActionItem from "../ActionItem";
 
 import VideosContext from "../../context/VideosContext";
 
