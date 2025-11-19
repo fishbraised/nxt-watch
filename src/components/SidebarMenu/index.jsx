@@ -1,4 +1,4 @@
-import MenuTab from "../Menutab";
+import MenuTab from "../MenuTab";
 
 import VideosContext from "../../context/VideosContext";
 
